@@ -1,0 +1,12 @@
+language: objective-c
+osx_image: xcode8.2
+xcode_sdk: macosx10.12
+xcode_project: Log4Swift.xcodeproj
+xcode_scheme: Log4Swift
+install:
+- gem install xcpretty --no-doc
+- swift package update
+script:
+- set -o pipefail
+- xcodebuild -project $TRAVIS_XCODE_PROJECT -scheme $TRAVIS_XCODE_SCHEME -sdk $TRAVIS_XCODE_SDK build | xcpretty -c
+- xcodebuild -project $TRAVIS_XCODE_PROJECT -scheme $TRAVIS_XCODE_SCHEME -sdk $TRAVIS_XCODE_SDK test  | xcpretty -c
